@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}Flight Detail - Airline System App{% endblock %}
+
+{% block content %}
+    <h1>Flight Detail</h1>
+    <table class='table'>
+        <tr>
+            <th>Departure</th>
+            <td>{{ flight.origin }}</td>
+        </tr>
+        <tr>
+            <th>Arrival</th>
+            <td>{{ flight.destination }}</td>
+        </tr>
+        <tr>
+            <th>Duration in Minutes</th>
+            <td>{{ flight.duration }}</td>
+        </tr>
+        <tr>
+            <th>Capacity</th>
+            <td>{{ flight.capacity }}</td>
+        </tr>
+    </table>
+    <h2>Passengers</h2>
+    {% if passengers|length > 0 %}
+        <table class='table'>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for passenger in passengers %}
+                    <tr>
+                        <td>{{ passenger.name }}</td>
+                        <td>{{ passenger.email }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class='alert alert-info text-center'>
+            <p>No passengers booked for this flight. Become the first to book a flight!</p>
+            <a href="{% url 'flights:flight_book' flight.id %}" class="btn btn-primary">Book Now</a>
+        </div>
+    {% endif %}
+
+{% endblock %}

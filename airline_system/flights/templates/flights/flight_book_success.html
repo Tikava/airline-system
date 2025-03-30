@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %}Success Booking - Airline System App{% endblock %}
+
+{% block content %}
+    <h1>Booking Successful</h1>
+    <p>Your flight has been successfully booked!</p>
+    <p>Booking UUID: {{ booking.booking_code }}</p>
+{% endblock %}

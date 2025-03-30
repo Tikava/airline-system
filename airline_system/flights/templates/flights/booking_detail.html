@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Booking Details - Airline System App{% endblock %}
+
+{% block content %}
+    <h1>Booking Information</h1>
+    <p>Flight Passenger Name: {{ booking.passenger.name }}</p>
+    <p>Flight Passenger Email: {{ booking.passenger.email }}</p>
+    <p>Flight Departure: {{ booking.flight.origin }}</p>
+    <p>Flight Arrival: {{ booking.flight.destination }}</p>
+    <p>Flight Duration in Minutes: {{ booking.flight.duration }}</p>
+    <p>Booking UUID: {{ booking.booking_code }}</p>
+{% endblock %}

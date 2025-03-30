@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Flights - Airline System App{% endblock %}
+
+
+{% block content %}
+    <h1>Flight List</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Departure</th>
+                <th>Arrival</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for flight in flights %}
+            <tr>
+                <td><a href="{% url 'flights:airport_detail' flight.origin.code %}">{{ flight.origin }}</a></td>
+                <td><a href="{% url 'flights:airport_detail' flight.destination.code %}">{{ flight.destination }}</a></td>
+                <td>
+                    <ul class="list-inline">
+                        <li><a href="{% url 'flights:flight_detail' flight.id %}">View</a></li>
+                        <li><a href="{% url 'flights:flight_book' flight.id %}">Book</a></li>
+                    </ul>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

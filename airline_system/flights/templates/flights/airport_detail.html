@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Airport Detail - Airline System App{% endblock %}
+
+{% block content %}
+
+<h1>Airport Detail</h1>
+<p>Airport Code: {{ airport.code }}</p>
+<p>Airport City: {{ airport.city }}</p>
+
+<h2>Arrivals to {{ airport.city }}</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Departure</th>
+            <th>Arrival</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for flight in arrivals %}
+        <tr>
+            <td>{{ flight.origin }}</td>
+            <td>{{ flight.destination }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h2>Departures from {{ airport.city }}</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Departure</th>
+            <th>Arrival</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for flight in departures %}
+        <tr>
+            <td>{{ flight.origin }}</td>
+            <td>{{ flight.destination }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}
