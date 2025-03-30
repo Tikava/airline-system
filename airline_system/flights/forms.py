@@ -2,10 +2,6 @@ from django import forms
 
 from .models import Passenger, Booking, Flight
 
-
-from django import forms
-from .models import Passenger, Booking
-
 class PassengerForm(forms.Form):
     name = forms.CharField(
         max_length=100, 
@@ -35,19 +31,15 @@ class PassengerForm(forms.Form):
         email = self.cleaned_data['email']
         flight_id = self.cleaned_data['flight_id']
 
-        flight = Flight.objects.get(id=flight_id)  # Ensure we get the flight instance
+        flight = Flight.objects.get(id=flight_id)
         
-        # Capacity should be incremented only if the booking is successful
         if flight.capacity > 0:
             flight.capacity -= 1
             flight.save()
         else:
             raise forms.ValidationError("No available seats for this flight.")
 
-        # Get or create the Passenger
         passenger, _ = Passenger.objects.get_or_create(email=email, defaults={'name': name})
-
-        # Create a Booking for this flight
         booking = Booking.objects.create(passenger=passenger, flight=flight)
 
         return booking
