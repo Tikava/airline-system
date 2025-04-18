@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Booking Info{% endblock %}
+{% block content %}
+<h1>Booking Found</h1>
+<ul class="list-group">
+    <li class="list-group-item"><strong>Name:</strong> {{ booking.passenger.name }}</li>
+    <li class="list-group-item"><strong>Email:</strong> {{ booking.passenger.user.email }}</li>
+    <li class="list-group-item"><strong>Flight:</strong> {{ booking.flight.origin }} → {{ booking.flight.destination }}</li>
+    <li class="list-group-item"><strong>Duration:</strong> {{ booking.flight.duration }} min</li>
+    <li class="list-group-item"><strong>Booking Code:</strong> {{ booking.booking_code }}</li>
+</ul>
+{% endblock %}

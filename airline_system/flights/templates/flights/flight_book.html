@@ -2,14 +2,29 @@
 
 {% block title %}Flight Booking - Airline System App{% endblock %}
 
-{% block content %} 
+{% block content %}
+<h1>Confirm Booking</h1>
 
-    <h1>Book Flight</h1>
-    <form action="{% url 'flights:flight_book' flight.id %}" method="POST">
-        {% csrf_token %}
-        
-        {{ form }}
-        <button type="submit" class="btn btn-primary">Book Flight</button>
-    </form>
+<p class="lead">Do you want to book the following flight?</p>
 
+<ul class="list-group mb-4">
+    <li class="list-group-item"><strong>From:</strong> {{ flight.origin }}</li>
+    <li class="list-group-item"><strong>To:</strong> {{ flight.destination }}</li>
+    <li class="list-group-item"><strong>Duration:</strong> {{ flight.duration }} minutes</li>
+    <li class="list-group-item"><strong>Seats Left:</strong> {{ flight.capacity }}</li>
+</ul>
+
+<form method="post" action="{% url 'flights:flight_book' flight.id %}">
+    {% csrf_token %}
+    {{ form.flight_id }}
+    
+    {% if form.non_field_errors %}
+        <div class="alert alert-danger">
+            {{ form.non_field_errors }}
+        </div>
+    {% endif %}
+
+    <button type="submit" class="btn btn-success">Yes, Book This Flight</button>
+    <a href="{% url 'flights:index' %}" class="btn btn-secondary ms-2">No, Go Back</a>
+</form>
 {% endblock %}

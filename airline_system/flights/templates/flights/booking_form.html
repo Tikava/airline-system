@@ -1,12 +1,21 @@
 {% extends 'base.html' %}
-
-{% block title %}View Booking - Airline System App{% endblock %}
-
+{% block title %}Find Your Booking{% endblock %}
 {% block content %}
-    <h1>Flight Booking</h1>
-    <form action="{% url 'flights:booking_detail' %}" method="POST"> 
-        {% csrf_token %}
-        {{ form }}
-        <button type="submit" class="btn btn-primary">View Details</button>
-    </form>
+<h1>Find Your Booking</h1>
+
+<form method="post" class="mt-4">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <div class="mb-3">
+        {{ form.booking_code.label_tag }}
+        {{ form.booking_code }}
+        {{ form.booking_code.errors }}
+    </div>
+    <div class="mb-3">
+        {{ form.email.label_tag }}
+        {{ form.email }}
+        {{ form.email.errors }}
+    </div>
+    <button type="submit" class="btn btn-primary">Find Booking</button>
+</form>
 {% endblock %}

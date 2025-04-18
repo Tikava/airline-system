@@ -1,0 +1,35 @@
+[
+    {
+      "model": "flights.airport",
+      "pk": 1,
+      "fields": {
+        "code": "ALA",
+        "city": "Almaty"
+      }
+    },
+    {
+      "model": "flights.airport",
+      "pk": 2,
+      "fields": {
+        "code": "NQZ",
+        "city": "Astana"
+      }
+    },
+    {
+      "model": "flights.airport",
+      "pk": 3,
+      "fields": {
+        "code": "TAS",
+        "city": "Tashkent"
+      }
+    },
+    {
+      "model": "flights.airport",
+      "pk": 4,
+      "fields": {
+        "code": "DXB",
+        "city": "Dubai"
+      }
+    }
+  ]
+  

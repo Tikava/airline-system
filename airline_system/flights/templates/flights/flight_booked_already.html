@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Already Booked - Airline System App{% endblock %}
+
+{% block content %}
+<h1>You Already Booked This Flight</h1>
+
+<ul class="list-group mb-4">
+    <li class="list-group-item"><strong>From:</strong> {{ flight.origin }}</li>
+    <li class="list-group-item"><strong>To:</strong> {{ flight.destination }}</li>
+    <li class="list-group-item"><strong>Duration:</strong> {{ flight.duration }} minutes</li>
+    <li class="list-group-item"><strong>Booking Code:</strong> {{ booking.booking_code }}</li>
+</ul>
+
+<a href="{% url 'flights:booking_detail' %}" class="btn btn-primary">View My Bookings</a>
+<a href="{% url 'flights:index' %}" class="btn btn-secondary ms-2">Back to Flights</a>
+{% endblock %}

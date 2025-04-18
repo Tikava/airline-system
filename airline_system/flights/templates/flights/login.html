@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Login - Airline System App{% endblock %}
+
+{% block content %}
+<h1>Login</h1>
+
+{% if error %}
+    <div class="alert alert-danger">{{ error }}</div>
+{% else %}
+    <div class="alert alert-info">Please enter your credentials to log in.</div>
+{% endif %}
+
+<form method="post" class="mt-3" action="{% url 'flights:login' %}">
+
+    {% csrf_token %}
+    <div class="mb-3">
+        {{ form.username.label_tag }}
+        {{ form.username }}
+    </div>
+    <div class="mb-3">
+        {{ form.password.label_tag }}
+        {{ form.password }}
+    </div>
+    <button type="submit" class="btn btn-primary">Login</button>
+</form>
+{% endblock %}

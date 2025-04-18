@@ -1,0 +1,43 @@
+[
+    {
+      "model": "flights.flight",
+      "pk": 1,
+      "fields": {
+        "origin": 1,
+        "destination": 2,
+        "duration": 90,
+        "capacity": 100
+      }
+    },
+    {
+      "model": "flights.flight",
+      "pk": 2,
+      "fields": {
+        "origin": 1,
+        "destination": 3,
+        "duration": 60,
+        "capacity": 80
+      }
+    },
+    {
+      "model": "flights.flight",
+      "pk": 3,
+      "fields": {
+        "origin": 3,
+        "destination": 4,
+        "duration": 240,
+        "capacity": 120
+      }
+    },
+    {
+      "model": "flights.flight",
+      "pk": 4,
+      "fields": {
+        "origin": 2,
+        "destination": 1,
+        "duration": 95,
+        "capacity": 100
+      }
+    }
+  ]
+  

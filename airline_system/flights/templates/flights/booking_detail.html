@@ -1,13 +1,21 @@
 {% extends 'base.html' %}
 
-{% block title %}Booking Details - Airline System App{% endblock %}
+{% block title %}My Bookings - Airline System App{% endblock %}
 
 {% block content %}
-    <h1>Booking Information</h1>
-    <p>Flight Passenger Name: {{ booking.passenger.name }}</p>
-    <p>Flight Passenger Email: {{ booking.passenger.email }}</p>
-    <p>Flight Departure: {{ booking.flight.origin }}</p>
-    <p>Flight Arrival: {{ booking.flight.destination }}</p>
-    <p>Flight Duration in Minutes: {{ booking.flight.duration }}</p>
-    <p>Booking UUID: {{ booking.booking_code }}</p>
+<h1>My Bookings</h1>
+
+{% if bookings %}
+    <ul class="list-group mb-4">
+        {% for booking in bookings %}
+        <li class="list-group-item">
+            <p><strong>Flight:</strong> {{ booking.flight.origin }} → {{ booking.flight.destination }}</p>
+            <p><strong>Duration:</strong> {{ booking.flight.duration }} minutes</p>
+            <p><strong>Booking Code:</strong> {{ booking.booking_code }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <div class="alert alert-info">You don’t have any bookings yet.</div>
+{% endif %}
 {% endblock %}
