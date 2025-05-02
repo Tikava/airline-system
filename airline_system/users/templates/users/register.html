@@ -5,7 +5,7 @@
 {% block content %}
 <h1>Register</h1>
 
-<form method="post" class="mt-3 p-4 border rounded bg-light" action="{% url 'flights:register' %}">
+<form method="post" class="mt-3 p-4 border rounded bg-light" action="{% url 'users:register' %}">
     {% csrf_token %}
     {% if form.non_field_errors %}
         <div class="alert alert-danger">
@@ -40,7 +40,7 @@
     <button type="submit" class="btn btn-success">Register</button>
 </form>
 
-<p class="mt-3">Already have an account? <a href="{% url 'flights:login' %}">Log in here</a>.</p>
+<p class="mt-3">Already have an account? <a href="{% url 'users:login' %}">Log in here</a>.</p>
 {% endblock %}
 
 
