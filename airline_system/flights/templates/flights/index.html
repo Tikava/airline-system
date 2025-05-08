@@ -1,31 +1,56 @@
 {% extends 'base.html' %}
 
-{% block title %}Flights - Airline System App{% endblock %}
-
-
 {% block content %}
-    <h1>Flight List</h1>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Departure</th>
-                <th>Arrival</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for flight in flights %}
-            <tr>
-                <td><a href="{% url 'flights:airport_detail' flight.origin.code %}">{{ flight.origin }}</a></td>
-                <td><a href="{% url 'flights:airport_detail' flight.destination.code %}">{{ flight.destination }}</a></td>
-                <td>
-                    <ul class="list-inline">
-                        <li><a href="{% url 'flights:flight_detail' flight.id %}">View</a></li>
-                        <li><a href="{% url 'flights:flight_book' flight.id %}">Book</a></li>
-                    </ul>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+  {% if show_promocode_modal %}
+    <!-- Modal -->
+    <div class="modal fade" id="promoModal" tabindex="-1" aria-labelledby="promoLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content text-center p-4">
+          <div class="modal-header border-0">
+            <h5 class="modal-title w-100" id="promoLabel">🎉 Welcome!</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <p class="fs-5">Thanks for joining us!</p>
+            <p>Your promocode is:</p>
+            <h2 class="text-primary">{{ promocode }}</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  <h1>Flight List</h1>
+  <table class="table">
+      <thead>
+          <tr>
+              <th>Departure</th>
+              <th>Arrival</th>
+              <th>Actions</th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for flight in flights %}
+          <tr>
+              <td><a href="{% url 'flights:airport_detail' flight.origin.code %}">{{ flight.origin }}</a></td>
+              <td><a href="{% url 'flights:airport_detail' flight.destination.code %}">{{ flight.destination }}</a></td>
+              <td>
+                  <ul class="list-inline">
+                      <li><a href="{% url 'flights:flight_detail' flight.id %}">View</a></li>
+                      <li><a href="{% url 'flights:flight_book' flight.id %}">Book</a></li>
+                  </ul>
+              </td>
+          </tr>
+          {% endfor %}
+      </tbody>
+  </table>
+{% endblock %}
+
+{% block scripts %}
+  {% if show_promocode_modal %}
+  <script>
+    const promoModal = new bootstrap.Modal(document.getElementById('promoModal'));
+    window.addEventListener('load', () => promoModal.show());
+  </script>
+  {% endif %}
 {% endblock %}

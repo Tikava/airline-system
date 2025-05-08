@@ -22,6 +22,7 @@ class Flight(models.Model):
 class Passenger(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
+    promocode = models.CharField(max_length=50, blank=True, null=True)
 
     def __str__(self):
         return f"{self.name} ({self.user.email})"

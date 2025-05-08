@@ -5,14 +5,20 @@ from . import forms
 
 
 def index(request):
-    flights = models.Flight.objects.all()
-    
-    context = {
-        'flights': flights
-    }
-    
-    return render(request, 'flights/index.html', context)
+    show_modal = request.session.pop('show_promocode_modal', False)
+    promocode = None
+    if request.user.is_authenticated:
+        try:
+            passenger = models.Passenger.objects.get(user=request.user)
+            promocode = passenger.promocode
+        except models.Passenger.DoesNotExist:
+            pass
 
+    return render(request, 'flights/index.html', {
+        'flights': models.Flight.objects.all(),
+        'show_promocode_modal': show_modal,
+        'promocode': promocode
+    })
 
     
 def flight_detail(request, flight_id):

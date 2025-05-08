@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block title %}User Profile - Airline System App{% endblock %}
+
+{% block content %}
+<h1>User Profile</h1>
+
+<!-- Profile Information -->
+<div class="mt-3 p-4 border rounded bg-light">
+    <h2>{{ user.username }}</h2>
+    <p>Email: {{ user.email }}</p>
+
+    {% if user.first_name %}
+        <p>
+            First Name: {{ user.first_name }}
+            <button class="btn btn-sm btn-outline-secondary ms-2" data-bs-toggle="modal" data-bs-target="#editFirstNameModal">
+                <i class="bi bi-pencil"></i>
+            </button>
+        </p>
+    {% else %}
+        <p>
+            First Name: Not provided
+            <button class="btn btn-sm btn-outline-primary mt-2" data-bs-toggle="modal" data-bs-target="#editFirstNameModal">
+                <i class="bi bi-pencil"></i> Add
+            </button>
+        </p>
+    {% endif %}
+
+    {% if user.last_name %}
+        <p>
+            Last Name: {{ user.last_name }}
+            <button class="btn btn-sm btn-outline-secondary ms-2" data-bs-toggle="modal" data-bs-target="#editLastNameModal">
+                <i class="bi bi-pencil"></i>
+            </button>
+        </p>
+    {% else %}
+        <p>
+            Last Name: Not provided
+            <button class="btn btn-sm btn-outline-primary mt-2" data-bs-toggle="modal" data-bs-target="#editLastNameModal">
+                <i class="bi bi-pencil"></i> Add
+            </button>
+        </p>
+    {% endif %}
+
+</div>
+{% endblock %}
+
+{% block modals %}
+<!-- First Name Modal -->
+<div class="modal fade" id="editFirstNameModal" tabindex="-1" aria-labelledby="editFirstNameModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form method="post" action="{% url 'users:user_profile' %}">
+        {% csrf_token %}
+        <div class="modal-header">
+          <h5 class="modal-title" id="editFirstNameModalLabel">Edit First Name</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          {{ first_name_form.first_name.label_tag }}
+          {{ first_name_form.first_name }}
+          {% if first_name_form.first_name.errors %}
+            <div class="text-danger">{{ first_name_form.first_name.errors }}</div>
+          {% endif %}
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Update First Name</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Last Name Modal -->
+<div class="modal fade" id="editLastNameModal" tabindex="-1" aria-labelledby="editLastNameModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form method="post" action="{% url 'users:user_profile' %}">
+        {% csrf_token %}
+        <div class="modal-header">
+          <h5 class="modal-title" id="editLastNameModalLabel">Edit Last Name</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          {{ last_name_form.last_name.label_tag }}
+          {{ last_name_form.last_name }}
+          {% if last_name_form.last_name.errors %}
+            <div class="text-danger">{{ last_name_form.last_name.errors }}</div>
+          {% endif %}
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Update Last Name</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<!-- Optional: disable submit button on form submit -->
+<script>
+  document.querySelectorAll("form").forEach(function(form) {
+    form.addEventListener("submit", function() {
+      const btn = form.querySelector("button[type='submit']");
+      if (btn) {
+        btn.disabled = true;
+        btn.innerText = "Updating...";
+      }
+    });
+  });
+</script>
+{% endblock %}

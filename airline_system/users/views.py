@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 from . import forms
 from flights import models
@@ -9,6 +10,36 @@ from flights import models
 def logout_view(request):
     logout(request)
     return render(request, 'users/logout.html')
+
+
+@login_required
+def user_profile_view(request):
+    user = request.user
+    passenger = models.Passenger.objects.get(user=user)
+
+    # Default empty forms
+    first_name_form = forms.FirstNameUpdateForm(instance=user)
+    last_name_form = forms.LastNameUpdateForm(instance=user)
+
+    if request.method == 'POST':
+        if 'first_name' in request.POST:
+            first_name_form = forms.FirstNameUpdateForm(request.POST, instance=user)
+            if first_name_form.is_valid():
+                first_name_form.save()
+                return redirect('users:user_profile')
+
+        elif 'last_name' in request.POST:
+            last_name_form = forms.LastNameUpdateForm(request.POST, instance=user)
+            if last_name_form.is_valid():
+                last_name_form.save()
+                return redirect('users:user_profile')
+
+    return render(request, 'users/user_profile.html', {
+        'user': user,
+        'passenger': passenger,
+        'first_name_form': first_name_form,
+        'last_name_form': last_name_form,
+    })
 
 def register_view(request):
     if request.method == 'POST':

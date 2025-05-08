@@ -61,3 +61,20 @@ class UserLoginForm(forms.Form):
             if user is None:
                 raise forms.ValidationError("Invalid username or password.")
         return cleaned_data
+    
+    
+class FirstNameUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name']
+        widgets = {
+            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
+        }
+
+class LastNameUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['last_name']
+        widgets = {
+            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
+        }
