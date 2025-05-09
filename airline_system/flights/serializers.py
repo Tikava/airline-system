@@ -19,7 +19,6 @@ class BookingSerializer(serializers.ModelSerializer):
             'passenger': {'required': True},
             'flight': {'required': True}
         }
-        depth = 1
         
         
         
